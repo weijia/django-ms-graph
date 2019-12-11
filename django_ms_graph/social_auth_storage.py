@@ -16,10 +16,9 @@ class SocialAuthStorage(object):
         if user.exists():
             social_auth, is_created = UserSocialAuth.objects.get_or_create(
                 user=user, provider=self.provider)
-            if is_created:
-                social_auth.uid = user_email
-                social_auth.extra_data = {"token": token}
-                social_auth.save()
+            social_auth.uid = user_email
+            social_auth.extra_data = {"token": token}
+            social_auth.save()
         else:
             raise UserNotExists
 
